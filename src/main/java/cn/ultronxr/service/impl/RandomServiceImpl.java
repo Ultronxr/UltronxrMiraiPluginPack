@@ -2,7 +2,7 @@ package cn.ultronxr.service.impl;
 
 import cn.hutool.core.util.RandomUtil;
 import cn.ultronxr.service.RandomService;
-import org.springframework.stereotype.Service;
+import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  * @author Ultronxr
  * @date 2022/06/29 11:41
  */
-@Service
+@Slf4j
 public class RandomServiceImpl implements RandomService {
 
     private static final BigInteger NEGATIVE_INFINITY_BIG = new BigInteger("-99999999999999999999");
@@ -42,7 +42,7 @@ public class RandomServiceImpl implements RandomService {
         rightNumberL = Math.max(tempL, rightNumberL);
 
         if(leftNumberL == rightNumberL){
-            //log.info("区间左右数字相等，随机整数结果：{}", leftNumberL);
+            log.debug("区间左右数字相等，随机整数结果：{}", leftNumberL);
             return leftNumberL;
         }
 
@@ -57,16 +57,24 @@ public class RandomServiceImpl implements RandomService {
         // 获取Long的随机整数，这个方法是左闭右开的 [leftNumberL, rightNumberL)
         long resNumberL = RandomUtil.randomLong(leftNumberL, rightNumberL);
 
-        //log.info("随机整数决断区间：[{}, {})", leftNumberL, rightNumberL);
-        //log.info("随机整数结果：{}", resNumberL);
+        log.debug("随机整数决断区间：[{}, {})", leftNumberL, rightNumberL);
+        log.debug("随机整数结果：{}", resNumberL);
         return resNumberL;
     }
 
     @Override
     public Long randomIntervalNumber(Long left, Long right) {
+        log.debug("左端点值：{}，右端点值：{}", left, right);
+        // 如果左端点值大于右端点值，交换两者
+        if(left > right) {
+            left = left^right;
+            right = left^right;
+            left = left^right;
+        }
         if(right != Long.MAX_VALUE) {
             right += 1;
         }
+        log.debug("决断左端点值：{}，决断右端点值：{}", left, right);
         return RandomUtil.randomLong(left, right);
     }
 
@@ -81,8 +89,8 @@ public class RandomServiceImpl implements RandomService {
         // 随机添加负数符号
         // resNumber = (RandomUtil.randomBoolean() ? "" : "-") + resNumber;
 
-        //log.info("随机整数指定长度：{}", length);
-        //log.info("随机整数结果：{}", resNumber);
+        log.debug("随机整数指定长度：{}", length);
+        log.debug("随机整数结果：{}", resNumber);
         return resNumber;
     }
 

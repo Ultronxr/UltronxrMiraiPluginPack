@@ -9,10 +9,6 @@ import net.mamoe.mirai.console.data.value
  * @date 2022/06/29 11:05
  */
 object Config : AutoSavePluginConfig("config") {
-    @ValueDescription("")
-    val apiKey: String by value()
-    @ValueDescription("")
-    val extendApiKey: List<String> by value()
-    @ValueDescription("")
-    val platform: String by value("PC")
+    @ValueDescription("插件是否启用：设置 false 时禁用插件。")
+    val enabled: Boolean by value(true)
 }

@@ -3,14 +3,15 @@ package cn.ultronxr;
 import cn.ultronxr.command.ClearCmd;
 import cn.ultronxr.command.RandomCmd;
 import net.mamoe.mirai.console.command.CommandManager;
+import net.mamoe.mirai.console.extension.PluginComponentStorage;
 import net.mamoe.mirai.console.plugin.jvm.JavaPlugin;
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescriptionBuilder;
 import net.mamoe.mirai.event.Event;
 import net.mamoe.mirai.event.EventChannel;
 import net.mamoe.mirai.event.GlobalEventChannel;
-import net.mamoe.mirai.event.events.FriendMessageEvent;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
-import org.springframework.stereotype.Component;
+import net.mamoe.mirai.utils.MiraiLogger;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Ultronxr
@@ -18,9 +19,10 @@ import org.springframework.stereotype.Component;
  *
  * 插件主类（入口）
  */
-@Component
 public final class UltronxrMiraiPluginPack extends JavaPlugin {
     public static final UltronxrMiraiPluginPack INSTANCE = new UltronxrMiraiPluginPack();
+
+    public static final MiraiLogger logger = INSTANCE.getLogger();
 
     /**
      * 插件描述
@@ -36,17 +38,24 @@ public final class UltronxrMiraiPluginPack extends JavaPlugin {
     }
 
     @Override
+    public void onLoad(@NotNull PluginComponentStorage $this$onLoad) {
+        super.onLoad($this$onLoad);
+        logger.info("插件 UltronxrMiraiPluginPack 加载...");
+    }
+
+    @Override
     public void onEnable() {
 
-        CommandManager.INSTANCE.registerCommand(ClearCmd.INSTANCE, false);
-        CommandManager.INSTANCE.registerCommand(RandomCmd.INSTANCE, false);
+        CommandManager.INSTANCE.registerCommand(ClearCmd.INSTANCE, true);
+        //CommandManager.INSTANCE.registerCommand(RandomCmd.INSTANCE.SIMPLE, true);
+        CommandManager.INSTANCE.registerCommand(RandomCmd.INSTANCE.COMPOSITE, true);
 
-        getLogger().info("插件 UltronxrMiraiPluginPack 已加载！");
+        logger.info("插件 UltronxrMiraiPluginPack 已启用！");
         EventChannel<Event> eventChannel = GlobalEventChannel.INSTANCE.parentScope(this);
         eventChannel.subscribeAlways(GroupMessageEvent.class, group -> {
             //监听群消息
             String msg = group.getMessage().contentToString();
-            getLogger().info(msg);
+            logger.info(msg);
             //group.getSubject().sendMessage("收到消息："+msg);
         });
         //eventChannel.subscribeAlways(FriendMessageEvent.class, friend -> {
@@ -57,8 +66,10 @@ public final class UltronxrMiraiPluginPack extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        logger.info("插件 UltronxrMiraiPluginPack 已禁用！");
         CommandManager.INSTANCE.unregisterCommand(ClearCmd.INSTANCE);
-        CommandManager.INSTANCE.unregisterCommand(RandomCmd.INSTANCE);
+        //CommandManager.INSTANCE.unregisterCommand(RandomCmd.INSTANCE.SIMPLE);
+        CommandManager.INSTANCE.unregisterCommand(RandomCmd.INSTANCE.COMPOSITE);
     }
 
 }

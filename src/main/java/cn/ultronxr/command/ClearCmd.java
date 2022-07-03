@@ -28,9 +28,9 @@ public class ClearCmd extends JSimpleCommand {
         sender.sendMessage(CLEAR_CONTENT_DEFAULT);
     }
 
-    // >clear <行数>
+    // >clear <空行数>
     @Handler
-    public void onCommand(CommandSender sender, Integer line) {
+    public void onCommand(CommandSender sender, @Name("空行数") Integer line) {
         if(line > 0) {
             sender.sendMessage("\n".repeat(line));
             return;
