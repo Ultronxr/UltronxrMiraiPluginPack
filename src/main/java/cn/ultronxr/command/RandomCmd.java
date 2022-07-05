@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
  * 命令 —— 随机数
  */
 public class RandomCmd {
+
     public static final RandomCmd INSTANCE = new RandomCmd();
     //public final SimpleCommand SIMPLE = new SimpleCommand();
     public final CompositeCommand COMPOSITE = new CompositeCommand();

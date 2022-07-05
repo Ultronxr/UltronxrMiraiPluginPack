@@ -11,6 +11,7 @@ import net.mamoe.mirai.console.command.java.JSimpleCommand;
  * 命令 —— 清屏
  */
 public class ClearCmd extends JSimpleCommand {
+
     public static final ClearCmd INSTANCE = new ClearCmd();
 
     private static final String CLEAR_CONTENT_DEFAULT = "\n".repeat(25);
@@ -18,7 +19,7 @@ public class ClearCmd extends JSimpleCommand {
 
     private ClearCmd() {
         super(UltronxrMiraiPluginPack.INSTANCE, "clear");
-        setDescription("清屏命令（发送若干换行符把消息刷过去）");
+        setDescription("清屏命令（空行数取值区间[1,80]，缺省值25）");
         setPrefixOptional(false);
     }
 
