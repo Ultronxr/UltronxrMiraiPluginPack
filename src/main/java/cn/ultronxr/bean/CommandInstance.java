@@ -1,9 +1,6 @@
 package cn.ultronxr.bean;
 
-import cn.ultronxr.command.ClearCmd;
-import cn.ultronxr.command.CmdHelperCmd;
-import cn.ultronxr.command.RandomCmd;
-import cn.ultronxr.command.SayCmd;
+import cn.ultronxr.command.*;
 import lombok.extern.slf4j.Slf4j;
 import net.mamoe.mirai.console.command.Command;
 import net.mamoe.mirai.console.command.CommandManager;
@@ -21,35 +18,53 @@ import java.util.Arrays;
 @Slf4j
 public class CommandInstance {
 
+    /**
+     * “命令维护容器”<br/>
+     * 注：该容器只维护所有命令实例对象，不负责维护其是否注册/注销等额外内容，如有需求请手动维护（优先考虑使用指令管理器）
+     */
     private static final ArrayList<Command> COMMANDS = new ArrayList<>();
 
-    private static final CommandManager COMMAND_MANAGER = CommandManager.INSTANCE;
+    /** Mirai Console 内置的 “指令管理器” */
+    public static final CommandManager COMMAND_MANAGER = CommandManager.INSTANCE;
+
 
     static {
+        // 在这里把所有的Command单例添加到容器
         addCmd(CmdHelperCmd.INSTANCE);
         addCmd(ClearCmd.INSTANCE);
         addCmd(RandomCmd.INSTANCE.COMPOSITE);
         addCmd(SayCmd.INSTANCE);
     }
 
-    public static void addCmd(Command cmd) {
+    /**
+     * 向维护容器中 添加 命令实例
+     *
+     * @param cmd 命令实例
+     */
+    public static void addCmd(@NotNull Command cmd) {
         COMMANDS.add(cmd);
     }
 
-    public static void registerAllCmd() {
-        COMMANDS.forEach(c -> {
-            COMMAND_MANAGER.registerCommand(c, true);
-            log.info("注册命令：{}", c.getPrimaryName());
-        });
+    /**
+     * 从维护容器中 获取 指定主指令名的 命令实例<br/>
+     * 注：这个方法无法获取到 Mirai Console 的内建命令！
+     *
+     * @param primaryName 主指令名
+     * @return 对应的命令实例，如果没有符合条件的则返回null
+     */
+    public static Command getCmd(@NotNull String primaryName) {
+        return COMMANDS.stream()
+                .filter(c -> c.getPrimaryName().equals(primaryName))
+                .findFirst()
+                .orElse(null);
     }
 
-    public static void unregisterAllCmd() {
-        COMMANDS.forEach(c -> {
-            COMMAND_MANAGER.unregisterCommand(c);
-            log.info("注销命令：{}", c.getPrimaryName());
-        });
-    }
-
+    /**
+     * 列出一个 指定命令实例的 详细信息
+     *
+     * @param cmd 命令实例
+     * @return 其详细信息
+     */
     public static String detailCmd(@NotNull Command cmd) {
         return "◆⭕ 主指令名 PrimaryName\n" + cmd.getPrimaryName() +
                 "\n⭕ 次要指令名 SecondaryNames\n" + Arrays.toString(cmd.getSecondaryNames()) +
@@ -62,12 +77,37 @@ public class CommandInstance {
                 "\n";
     }
 
+    /**
+     * 列出维护容器中 所有命令实例的 详细信息
+     *
+     * @return 详细信息
+     */
     public static String listAllCmd() {
         StringBuilder sb = new StringBuilder();
         sb.append("===== listAllCmd =====\n");
         COMMANDS.forEach(c -> sb.append(detailCmd(c)).append("\n"));
         sb.append("===== listAllCmd =====\n");
         return sb.toString();
+    }
+
+    /**
+     * （指令管理器）注册 维护容器中的 所有命令实例
+     */
+    public static void registerAllCmd() {
+        COMMANDS.forEach(c -> {
+            COMMAND_MANAGER.registerCommand(c, true);
+            log.info("注册命令：{}", c.getPrimaryName());
+        });
+    }
+
+    /**
+     * （指令管理器）注销 维护容器中的 所有命令实例
+     */
+    public static void unregisterAllCmd() {
+        COMMANDS.forEach(c -> {
+            COMMAND_MANAGER.unregisterCommand(c);
+            log.info("注销命令：{}", c.getPrimaryName());
+        });
     }
 
 }
