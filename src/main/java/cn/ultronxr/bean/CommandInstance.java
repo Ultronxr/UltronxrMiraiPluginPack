@@ -34,6 +34,7 @@ public class CommandInstance {
         addCmd(ClearCmd.INSTANCE);
         addCmd(RandomCmd.INSTANCE.COMPOSITE);
         addCmd(SayCmd.INSTANCE);
+        addCmd(WeatherCmd.INSTANCE);
     }
 
     /**
