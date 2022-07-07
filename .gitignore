@@ -129,3 +129,7 @@ src/test/kotlin/RunTerminal.kt
 
 # Local Test Launch Point working directory
 /debug-sandbox
+
+# 涉及敏感信息的配置文件
+src/main/resources/conf/aliCloudConfig.properties
+

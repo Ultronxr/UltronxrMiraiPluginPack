@@ -2,11 +2,21 @@ package cn.ultronxr.bean;
 
 import lombok.Data;
 
+import java.util.ResourceBundle;
+
 /**
  * @author Ultronxr
  * @date 2022/06/29 11:43
  */
 public class GlobalData {
+
+    /** ResourceBundle封装 */
+    @Data
+    public static class ResBundle {
+
+        public static final ResourceBundle ALI_CLOUD = ResourceBundle.getBundle("conf.aliCloudConfig");
+
+    }
 
     /**
      * 正则表达式
