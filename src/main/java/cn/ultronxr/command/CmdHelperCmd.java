@@ -25,6 +25,9 @@ public class CmdHelperCmd extends JCompositeCommand {
 
     public static final CmdHelperCmd INSTANCE = new CmdHelperCmd();
 
+    private static final File GENERATE_PERMISSION_PERMIT_HELP_FILE =
+            new File(CmdHelperCmd.class.getResource("/img/generatePermissionPermitHelp.png").getFile());
+
 
     private CmdHelperCmd() {
         super(UltronxrMiraiPluginPack.INSTANCE, "cmdhelper", "cp");
@@ -119,10 +122,7 @@ public class CmdHelperCmd extends JCompositeCommand {
     @SubCommand({"generatePermissionPermitHelp", "gppHELP"})
     public void generatePermissionPermitHelp(CommandSender sender) {
         String originalUrl = "https://github.com/mamoe/mirai/blob/dev/mirai-console/docs/Permissions.md#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A1%A8%E7%A4%BA";
-        File file = new File(
-                this.getClass().getResource("/img/generatePermissionPermitHelp.png").getFile()
-        );
-        Image img = ExternalResource.uploadAsImage(file, sender.getSubject());
+        Image img = ExternalResource.uploadAsImage(GENERATE_PERMISSION_PERMIT_HELP_FILE, sender.getSubject());
         MessageChain msgChain = new MessageChainBuilder().append(originalUrl).append(img).build();
         sender.sendMessage(msgChain);
     }

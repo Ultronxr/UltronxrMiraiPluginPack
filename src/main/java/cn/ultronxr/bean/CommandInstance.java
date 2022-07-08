@@ -32,6 +32,7 @@ public class CommandInstance {
         // 在这里把所有的Command单例添加到容器
         addCmd(CmdHelperCmd.INSTANCE);
         addCmd(ClearCmd.INSTANCE);
+        addCmd(QRCodeCmd.INSTANCE);
         addCmd(RandomCmd.INSTANCE.COMPOSITE);
         addCmd(SayCmd.INSTANCE);
         addCmd(WeatherCmd.INSTANCE);
