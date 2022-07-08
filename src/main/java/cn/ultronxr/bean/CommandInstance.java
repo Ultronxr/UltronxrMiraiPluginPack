@@ -33,7 +33,7 @@ public class CommandInstance {
         addCmd(CmdHelperCmd.INSTANCE);
         addCmd(ClearCmd.INSTANCE);
         addCmd(QRCodeCmd.INSTANCE);
-        addCmd(RandomCmd.INSTANCE.COMPOSITE);
+        addCmd(RandomCmd.INSTANCE);
         addCmd(SayCmd.INSTANCE);
         addCmd(WeatherCmd.INSTANCE);
     }
