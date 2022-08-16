@@ -97,8 +97,11 @@ public class CommandInstance {
      */
     public static void registerAllCmd() {
         COMMANDS.forEach(c -> {
-            COMMAND_MANAGER.registerCommand(c, true);
-            log.info("注册命令：{}", c.getPrimaryName());
+            if(COMMAND_MANAGER.registerCommand(c, true)) {
+                log.info("注册命令：{}", c.getPrimaryName());
+            } else {
+                log.info("注册命令失败：{}", c.getPrimaryName());
+            }
         });
     }
 
@@ -107,8 +110,9 @@ public class CommandInstance {
      */
     public static void unregisterAllCmd() {
         COMMANDS.forEach(c -> {
-            COMMAND_MANAGER.unregisterCommand(c);
-            log.info("注销命令：{}", c.getPrimaryName());
+            if(COMMAND_MANAGER.isCommandRegistered(c) && COMMAND_MANAGER.unregisterCommand(c)) {
+                log.info("注销命令：{}", c.getPrimaryName());
+            }
         });
     }
 

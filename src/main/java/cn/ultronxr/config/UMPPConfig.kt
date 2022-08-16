@@ -16,4 +16,7 @@ object UMPPConfig : AutoSavePluginConfig("UMPPConfig") {
     @ValueDescription("插件日志等级：ALL,TRACE,DEBUG,INFO,WARN,ERROR,FATAL,OFF")
     val logPriority: String by value("INFO")
 
+    @ValueDescription("本插件中已启用的命令（主指令名）")
+    val commandEnabled: Array<String> by value(arrayOf())
+
 }
