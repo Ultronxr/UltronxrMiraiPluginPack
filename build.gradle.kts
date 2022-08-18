@@ -1,20 +1,28 @@
+group = "cn.ultronxr"
+version = "1.0-SNAPSHOT"
+
 plugins {
     val kotlinVersion = "1.6.21"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
 
+    id("org.gradle.idea")
     id("net.mamoe.mirai-console") version "2.12.1"
     //id("net.mamoe.mirai-core") version "2.12.1"
 }
 
-group = "cn.ultronxr"
-version = "1.0-SNAPSHOT"
+idea {
+    module {
+        inheritOutputDirs = true
+    }
+}
 
 repositories {
     //mavenLocal()
     maven("https://maven.aliyun.com/repository/public")
     mavenCentral()
 }
+
 dependencies {
     //implementation("org.springframework.boot:spring-boot-starter:2.5.5") {
     //    exclude ("org.springframework.boot", "spring-boot-starter-logging")
