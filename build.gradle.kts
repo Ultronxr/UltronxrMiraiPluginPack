@@ -1,5 +1,5 @@
 group = "cn.ultronxr"
-version = "1.0-SNAPSHOT"
+version = "0.1.0"
 
 plugins {
     val kotlinVersion = "1.6.21"
