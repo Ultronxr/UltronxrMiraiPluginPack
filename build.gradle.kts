@@ -7,7 +7,7 @@ plugins {
     kotlin("plugin.serialization") version kotlinVersion
 
     id("org.gradle.idea")
-    id("net.mamoe.mirai-console") version "2.12.1"
+    id("net.mamoe.mirai-console") version "2.14.0"
     //id("net.mamoe.mirai-core") version "2.12.1"
 }
 

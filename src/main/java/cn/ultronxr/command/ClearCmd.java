@@ -16,6 +16,8 @@ public class ClearCmd extends JSimpleCommand {
 
     private static final String CLEAR_CONTENT_DEFAULT = "\n".repeat(25);
 
+    private static final int MAX_LINE_NUMBER = 80;
+
 
     private ClearCmd() {
         super(UltronxrMiraiPluginPack.INSTANCE, "clear");
@@ -33,6 +35,7 @@ public class ClearCmd extends JSimpleCommand {
     @Handler
     public void onCommand(CommandSender sender, @Name("空行数") Integer line) {
         if(line > 0) {
+            line = Math.min(line, MAX_LINE_NUMBER);
             sender.sendMessage("\n".repeat(line));
             return;
         }

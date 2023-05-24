@@ -12,7 +12,9 @@ import net.mamoe.mirai.message.data.MessageChain;
 import net.mamoe.mirai.message.data.MessageChainBuilder;
 import net.mamoe.mirai.utils.ExternalResource;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 
 /**
  * @author Ultronxr
@@ -122,9 +124,19 @@ public class CmdHelperCmd extends JCompositeCommand {
     @SubCommand({"generatePermissionPermitHelp", "gppHELP"})
     public void generatePermissionPermitHelp(CommandSender sender) {
         String originalUrl = "https://github.com/mamoe/mirai/blob/dev/mirai-console/docs/Permissions.md#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A1%A8%E7%A4%BA";
-        Image img = ExternalResource.uploadAsImage(GENERATE_PERMISSION_PERMIT_HELP_INPUT_STREAM, sender.getSubject());
+        //Image img = ExternalResource.uploadAsImage(GENERATE_PERMISSION_PERMIT_HELP_INPUT_STREAM, sender.getSubject());
+        InputStream inputStream = CmdHelperCmd.class.getClassLoader().getResourceAsStream("img/generatePermissionPermitHelp.png");
+        Image img = ExternalResource.uploadAsImage(
+                Objects.requireNonNull(inputStream),
+                Objects.requireNonNull(sender.getSubject())
+        );
         MessageChain msgChain = new MessageChainBuilder().append(originalUrl).append(img).build();
         sender.sendMessage(msgChain);
+        try {
+            inputStream.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
