@@ -1,5 +1,6 @@
-group = "cn.ultronxr"
+group = "cn.ultronxr.umpp"
 version = "0.1.0"
+description = "Java 开发的应用于 Mirai Console 的QQ聊天机器人插件包。"
 
 plugins {
     val kotlinVersion = "1.6.21"

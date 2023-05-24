@@ -1,5 +1,6 @@
 package cn.ultronxr
 
+import cn.ultronxr.umpp.UltronxrMiraiPluginPack
 import java.io.File
 import net.mamoe.mirai.alsoLogin
 import net.mamoe.mirai.console.MiraiConsole
