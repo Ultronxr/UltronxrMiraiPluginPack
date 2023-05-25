@@ -1,13 +1,15 @@
 package cn.ultronxr.umpp;
 
 import cn.ultronxr.umpp.bean.CommandInstance;
+import cn.ultronxr.umpp.eventHandler.BotEventHandler;
+import cn.ultronxr.umpp.eventHandler.GroupEventHandler;
 import net.mamoe.mirai.console.extension.PluginComponentStorage;
 import net.mamoe.mirai.console.plugin.jvm.JavaPlugin;
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescriptionBuilder;
 import net.mamoe.mirai.event.Event;
 import net.mamoe.mirai.event.EventChannel;
 import net.mamoe.mirai.event.GlobalEventChannel;
-import net.mamoe.mirai.event.events.GroupMessageEvent;
+import net.mamoe.mirai.event.events.*;
 import net.mamoe.mirai.utils.MiraiLogger;
 import org.apache.log4j.PropertyConfigurator;
 import org.jetbrains.annotations.NotNull;
@@ -58,6 +60,16 @@ public final class UltronxrMiraiPluginPack extends JavaPlugin {
         CommandInstance.registerAllCmd();
 
         EventChannel<Event> eventChannel = GlobalEventChannel.INSTANCE.parentScope(this);
+
+        // BOT事件
+        eventChannel.subscribeAlways(BotOfflineEvent.class, BotEventHandler.INSTANCE::botOfflineHandler);
+        eventChannel.subscribeAlways(BotReloginEvent.class, BotEventHandler.INSTANCE::botReloginHandler);
+
+        // 群事件
+        eventChannel.subscribeAlways(MemberJoinEvent.class, GroupEventHandler.INSTANCE::onMemberJoin);
+        eventChannel.subscribeAlways(MemberLeaveEvent.class, GroupEventHandler.INSTANCE::onMemberLeave);
+
+        // 消息事件
         eventChannel.subscribeAlways(GroupMessageEvent.class, group -> {
             //监听群消息
             String msg = group.getMessage().contentToString();
