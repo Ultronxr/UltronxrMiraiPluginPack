@@ -1,6 +1,7 @@
 package cn.ultronxr.umpp.bean;
 
 import cn.ultronxr.umpp.command.*;
+import cn.ultronxr.umpp.command.codeToolkit.*;
 import lombok.extern.slf4j.Slf4j;
 import net.mamoe.mirai.console.command.Command;
 import net.mamoe.mirai.console.command.CommandManager;
@@ -37,6 +38,10 @@ public class CommandInstance {
         addCmd(SayCmd.INSTANCE);
         addCmd(WeatherCmd.INSTANCE);
         addCmd(EpicCmd.INSTANCE);
+        addCmd(ImgCmd.INSTANCE);
+        addCmd(Md5Cmd.INSTANCE);
+        addCmd(UrlCmd.INSTANCE);
+        addCmd(UnicodeCmd.INSTANCE);
     }
 
     /**

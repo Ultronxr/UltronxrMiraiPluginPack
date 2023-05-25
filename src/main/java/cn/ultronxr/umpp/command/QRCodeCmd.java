@@ -33,7 +33,7 @@ public class QRCodeCmd extends JCompositeCommand {
     }
 
     // >qrcode en <文本内容>
-    @Description("生成二维码（如有空格或换行请使用英文双引号\"\"括起）")
+    @Description("生成二维码（若有特殊字符使用英文双引号\"\"括起）")
     @SubCommand("en")
     public void encode(CommandSender sender, @Name("文本内容") @NotNull String content) {
         ByteArrayOutputStream outputStream = qrCodeService.encode(content);

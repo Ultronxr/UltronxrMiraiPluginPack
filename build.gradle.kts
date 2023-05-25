@@ -44,7 +44,7 @@ dependencies {
     // 开发工具/插件
     compileOnly("org.projectlombok:lombok:1.18.24")
     annotationProcessor("org.projectlombok:lombok:1.18.24")
-    implementation("cn.hutool:hutool-all:5.8.3")
+    implementation("cn.hutool:hutool-all:5.8.10")
 
     // 二维码
     implementation("com.google.zxing:core:3.5.0")
