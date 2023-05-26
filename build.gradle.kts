@@ -3,12 +3,12 @@ version = "0.1.0"
 description = "Java 开发的应用于 Mirai Console 的QQ聊天机器人插件包。"
 
 plugins {
-    val kotlinVersion = "1.6.21"
+    val kotlinVersion = "1.8.0"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
 
     id("org.gradle.idea")
-    id("net.mamoe.mirai-console") version "2.14.0"
+    id("net.mamoe.mirai-console") version "2.15.0-M1"
     //id("net.mamoe.mirai-core") version "2.12.1"
 }
 

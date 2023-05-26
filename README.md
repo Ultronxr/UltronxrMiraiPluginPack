@@ -43,6 +43,72 @@
 
 [权限字符串表示 列表](https://github.com/mamoe/mirai/blob/dev/mirai-console/docs/Permissions.md#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A1%A8%E7%A4%BA)
 
+## mirai 核心组件的版本修改方式
+
+[MCL命令手册](https://github.com/iTXTech/mirai-console-loader/blob/master/cli.md) 中已经介绍过， `maven` 支持两个子频道： `stable` 与 `prerelease` 。
+
+可以使用命令分别对每一个组件包进行更新，但是这样太麻烦了，这里我使用直接修改配置文件的方式完成。
+
+修改 MCL 安装根目录下的 `config.json` 文件（如下版本仅供示例，具体版本自己选择）：
+
+```json
+{
+  // ...
+  // 这是 stable 频道的版本配置（注意 channel version type 字段）
+  "packages": {
+    "net.mamoe:mirai-console": {
+      "channel": "maven-stable",
+      "version": "2.14.0",
+      "type": "libs",
+      "versionLocked": false
+    },
+    "net.mamoe:mirai-console-terminal": {
+      "channel": "maven-stable",
+      "version": "2.14.0",
+      "type": "libs",
+      "versionLocked": false
+    },
+    "net.mamoe:mirai-core-all": {
+      "channel": "maven-stable",
+      "version": "2.14.0",
+      "type": "libs",
+      "versionLocked": false
+    },
+    // ...
+  },
+  // ...
+}
+```
+
+```json
+{
+  // ...
+  // 这是 prerelease 频道的版本配置（注意 channel version type 字段）
+  "packages": {
+    "net.mamoe:mirai-console": {
+      "channel": "maven-prerelease",
+      "version": "2.15.0-M1",
+      "type": "libs",
+      "versionLocked": false
+    },
+    "net.mamoe:mirai-console-terminal": {
+      "channel": "maven-prerelease",
+      "version": "2.15.0-M1",
+      "type": "libs",
+      "versionLocked": false
+    },
+    "net.mamoe:mirai-core-all": {
+      "channel": "maven-prerelease",
+      "version": "2.15.0-M1",
+      "type": "libs",
+      "versionLocked": false
+    },
+    // ...
+  },
+  // ...
+}
+```
+
 # 开发心得
 
 ## 报错及解决

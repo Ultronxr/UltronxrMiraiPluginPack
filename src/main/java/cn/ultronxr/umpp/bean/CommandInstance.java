@@ -42,6 +42,8 @@ public class CommandInstance {
         addCmd(Md5Cmd.INSTANCE);
         addCmd(UrlCmd.INSTANCE);
         addCmd(UnicodeCmd.INSTANCE);
+        addCmd(ElectricityBillCmd.INSTANCE);
+        addCmd(ElectricityBillCompositeCmd.INSTANCE);
     }
 
     /**
