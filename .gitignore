@@ -132,4 +132,3 @@ src/test/kotlin/RunTerminal.kt
 
 # 涉及敏感信息的文件
 src/main/resources/conf/aliCloudConfig.properties
-ElectricityBillServiceImpl.java

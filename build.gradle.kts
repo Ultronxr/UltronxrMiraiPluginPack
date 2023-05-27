@@ -1,5 +1,5 @@
 group = "cn.ultronxr.umpp"
-version = "0.1.0"
+version = "0.1.5"
 description = "Java 开发的应用于 Mirai Console 的QQ聊天机器人插件包。"
 
 plugins {
