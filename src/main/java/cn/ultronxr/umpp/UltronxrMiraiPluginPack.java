@@ -3,6 +3,7 @@ package cn.ultronxr.umpp;
 import cn.ultronxr.umpp.bean.CommandInstance;
 import cn.ultronxr.umpp.eventHandler.BotEventHandler;
 import cn.ultronxr.umpp.eventHandler.GroupEventHandler;
+import cn.ultronxr.umpp.timer.TimerManager;
 import net.mamoe.mirai.console.extension.PluginComponentStorage;
 import net.mamoe.mirai.console.plugin.jvm.JavaPlugin;
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescriptionBuilder;
@@ -57,7 +58,10 @@ public final class UltronxrMiraiPluginPack extends JavaPlugin {
     public void onEnable() {
         log.info("插件 UltronxrMiraiPluginPack(UMPP) 已启用！");
 
+        // 注册命令
         CommandInstance.registerAllCmd();
+        // 启动定时器
+        TimerManager.runTimerTasks();
 
         EventChannel<Event> eventChannel = GlobalEventChannel.INSTANCE.parentScope(this);
 

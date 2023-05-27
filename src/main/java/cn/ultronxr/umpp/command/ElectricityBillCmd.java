@@ -26,7 +26,7 @@ public class ElectricityBillCmd extends JSimpleCommand {
     // >df
     @Handler
     public void onCommand(CommandSender sender) {
-        sender.sendMessage(electricityBillService.getResult());
+        sender.sendMessage(electricityBillService.getResult().toString());
     }
 
 }

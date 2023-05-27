@@ -23,18 +23,20 @@ public class ElectricityBillCompositeCmd extends JCompositeCommand {
         setPrefixOptional(false);
     }
 
-    // >df qq <true/false>
+    // >dfc qq <true/false>
     @Description("启用/禁用低电费QQ自动提醒功能")
     @SubCommand("qq")
-    public void qq(CommandSender sender, @Name("true/false") Boolean status) {
-        sender.sendMessage("QQ状态：" + status);
+    public void qq(CommandSender sender, @Name("true/false") Boolean enable) {
+        electricityBillService.setQQAlertEnable(enable);
+        sender.sendMessage("低电费QQ自动提醒功能状态：" + electricityBillService.isQQAlertEnabled());
     }
 
-    // >df sms <true/false>
+    // >dfc sms <true/false>
     @Description("启用/禁用低电费短信自动提醒功能")
     @SubCommand("sms")
-    public void sms(CommandSender sender, @Name("true/false") Boolean status) {
-        sender.sendMessage("短信状态：" + status);
+    public void sms(CommandSender sender, @Name("true/false") Boolean enable) {
+        electricityBillService.setSmsAlertEnable(enable);
+        sender.sendMessage("低电费短信自动提醒功能状态：" + electricityBillService.isSmsAlertEnabled());
     }
 
 }
