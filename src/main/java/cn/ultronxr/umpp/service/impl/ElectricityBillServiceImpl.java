@@ -124,10 +124,10 @@ public class ElectricityBillServiceImpl implements ElectricityBillService {
         float balance = Float.parseFloat(result.getBalance());
         // (10,20] 区间提醒一次，且夜间免打扰
         if(balance <= RED_LINE_20 && balance > RED_LINE_10 && LAST_ALERT_BALANCE > RED_LINE_20) {
-            if(!isInDaytimeWorkingHour()) {
-                // 夜间免打扰
-                return false;
-            }
+            //if(!isInDaytimeWorkingHour()) {
+            //    // 夜间免打扰
+            //    return false;
+            //}
             LAST_ALERT_BALANCE = balance;
             return true;
         }

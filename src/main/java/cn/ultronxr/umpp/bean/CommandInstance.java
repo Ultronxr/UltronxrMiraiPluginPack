@@ -44,6 +44,7 @@ public class CommandInstance {
         addCmd(UnicodeCmd.INSTANCE);
         addCmd(ElectricityBillCmd.INSTANCE);
         addCmd(ElectricityBillCompositeCmd.INSTANCE);
+        addCmd(RecallCmd.INSTANCE);
     }
 
     /**

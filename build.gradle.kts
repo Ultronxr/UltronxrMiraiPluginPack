@@ -1,5 +1,5 @@
 group = "cn.ultronxr.umpp"
-version = "0.1.5"
+version = "0.1.6"
 description = "Java 开发的应用于 Mirai Console 的QQ聊天机器人插件包。"
 
 plugins {
@@ -8,7 +8,7 @@ plugins {
     kotlin("plugin.serialization") version kotlinVersion
 
     id("org.gradle.idea")
-    id("net.mamoe.mirai-console") version "2.15.0-M1"
+    id("net.mamoe.mirai-console") version "2.15.0"
     //id("net.mamoe.mirai-core") version "2.12.1"
 }
 

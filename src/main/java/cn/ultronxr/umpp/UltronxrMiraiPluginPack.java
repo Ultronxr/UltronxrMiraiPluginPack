@@ -3,6 +3,7 @@ package cn.ultronxr.umpp;
 import cn.ultronxr.umpp.bean.CommandInstance;
 import cn.ultronxr.umpp.eventHandler.BotEventHandler;
 import cn.ultronxr.umpp.eventHandler.GroupEventHandler;
+import cn.ultronxr.umpp.eventHandler.GroupMsgEventHandler;
 import cn.ultronxr.umpp.timer.TimerManager;
 import net.mamoe.mirai.console.extension.PluginComponentStorage;
 import net.mamoe.mirai.console.plugin.jvm.JavaPlugin;
@@ -40,7 +41,7 @@ public final class UltronxrMiraiPluginPack extends JavaPlugin {
      * {@see "https://github.com/mamoe/mirai/blob/dev/mirai-console/docs/plugin/JVMPlugin.md#%E6%8F%8F%E8%BF%B0"}
      */
     public UltronxrMiraiPluginPack() {
-        super(new JvmPluginDescriptionBuilder("cn.ultronxr.ultronxr-mirai-plugin-pack", "0.1.5")
+        super(new JvmPluginDescriptionBuilder("cn.ultronxr.ultronxr-mirai-plugin-pack", "0.1.6")
                 .name("UltronxrMiraiPluginPack(UMPP)")
                 .info("Java 开发的应用于 Mirai Console 的QQ聊天机器人插件包。")
                 .author("Ultronxr")
@@ -73,12 +74,15 @@ public final class UltronxrMiraiPluginPack extends JavaPlugin {
         eventChannel.subscribeAlways(MemberJoinEvent.class, GroupEventHandler.INSTANCE::onMemberJoin);
         eventChannel.subscribeAlways(MemberLeaveEvent.class, GroupEventHandler.INSTANCE::onMemberLeave);
 
-        // 消息事件
-        eventChannel.subscribeAlways(GroupMessageEvent.class, group -> {
-            //监听群消息
-            String msg = group.getMessage().contentToString();
-            log.info(msg);
-        });
+        // 群消息事件
+        eventChannel.subscribeAlways(GroupMessageEvent.class, GroupMsgEventHandler.INSTANCE::logMsg);
+        eventChannel.subscribeAlways(MessageRecallEvent.GroupRecall.class, GroupMsgEventHandler.INSTANCE::recallMsg);
+
+        //eventChannel.subscribeAlways(GroupMessageEvent.class, group -> {
+        //    //监听群消息
+        //    String msg = group.getMessage().contentToString();
+        //    log.info(msg);
+        //});
         //eventChannel.subscribeAlways(FriendMessageEvent.class, friend -> {
         //    //监听好友消息
         //    getLogger().info(friend.getMessage().contentToString());
