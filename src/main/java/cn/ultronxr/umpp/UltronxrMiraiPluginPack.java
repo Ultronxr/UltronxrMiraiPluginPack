@@ -41,7 +41,7 @@ public final class UltronxrMiraiPluginPack extends JavaPlugin {
      * {@see "https://github.com/mamoe/mirai/blob/dev/mirai-console/docs/plugin/JVMPlugin.md#%E6%8F%8F%E8%BF%B0"}
      */
     public UltronxrMiraiPluginPack() {
-        super(new JvmPluginDescriptionBuilder("cn.ultronxr.ultronxr-mirai-plugin-pack", "0.1.6")
+        super(new JvmPluginDescriptionBuilder("cn.ultronxr.ultronxr-mirai-plugin-pack", "0.1.7")
                 .name("UltronxrMiraiPluginPack(UMPP)")
                 .info("Java 开发的应用于 Mirai Console 的QQ聊天机器人插件包。")
                 .author("Ultronxr")
