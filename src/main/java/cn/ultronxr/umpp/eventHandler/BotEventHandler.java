@@ -3,6 +3,7 @@ package cn.ultronxr.umpp.eventHandler;
 import lombok.extern.slf4j.Slf4j;
 import net.mamoe.mirai.event.events.BotOfflineEvent;
 import net.mamoe.mirai.event.events.BotReloginEvent;
+import net.mamoe.mirai.event.events.NewFriendRequestEvent;
 
 /**
  * @author Ultronxr
@@ -40,6 +41,24 @@ public class BotEventHandler {
      */
     public void botReloginHandler(BotReloginEvent botReloginEvent) {
         log.info("[system] qqrobot机器人（重新）登录事件");
+    }
+
+    /**
+     * BOT 收到好友添加请求 事件处理器
+     * @param newFriendRequestEvent 好友添加请求事件
+     */
+    public void newFriendRequestHandler(NewFriendRequestEvent newFriendRequestEvent) {
+        long requestQQ = newFriendRequestEvent.getFromId();
+        String requestMsg = newFriendRequestEvent.getMessage().trim();
+        log.info("[system] qqrobot机器人收到好友添加请求：qq={} , message={}", requestQQ, requestMsg);
+
+        if(requestMsg.equals("InitFriendRequestKey123000")) { // TODO 修改这个密钥
+            log.info("[system] qqrobot机器人好友添加请求处理结果：qq={} , 处理结果=accept", requestQQ);
+            newFriendRequestEvent.accept();
+            return;
+        }
+        newFriendRequestEvent.reject(false);
+        log.info("[system] qqrobot机器人好友添加请求处理结果：qq={} , 处理结果=reject", requestQQ);
     }
 
 }
