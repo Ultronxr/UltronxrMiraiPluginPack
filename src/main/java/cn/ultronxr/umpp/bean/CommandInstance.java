@@ -45,6 +45,7 @@ public class CommandInstance {
         addCmd(ElectricityBillCmd.INSTANCE);
         addCmd(ElectricityBillCompositeCmd.INSTANCE);
         addCmd(RecallCmd.INSTANCE);
+        addCmd(LORPOCCmd.INSTANCE);
     }
 
     /**
