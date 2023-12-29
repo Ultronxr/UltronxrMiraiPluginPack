@@ -41,7 +41,7 @@ public final class UltronxrMiraiPluginPack extends JavaPlugin {
      * {@see "https://github.com/mamoe/mirai/blob/dev/mirai-console/docs/plugin/JVMPlugin.md#%E6%8F%8F%E8%BF%B0"}
      */
     public UltronxrMiraiPluginPack() {
-        super(new JvmPluginDescriptionBuilder("cn.ultronxr.ultronxr-mirai-plugin-pack", "0.2.0")
+        super(new JvmPluginDescriptionBuilder("cn.ultronxr.ultronxr-mirai-plugin-pack", "0.2.1")
                 .name("UltronxrMiraiPluginPack(UMPP)")
                 .info("Java 开发的应用于 Mirai Console 的QQ聊天机器人插件包。")
                 .author("Ultronxr")
@@ -70,6 +70,7 @@ public final class UltronxrMiraiPluginPack extends JavaPlugin {
         eventChannel.subscribeAlways(BotOfflineEvent.class, BotEventHandler.INSTANCE::botOfflineHandler);
         eventChannel.subscribeAlways(BotReloginEvent.class, BotEventHandler.INSTANCE::botReloginHandler);
         eventChannel.subscribeAlways(NewFriendRequestEvent.class, BotEventHandler.INSTANCE::newFriendRequestHandler);
+        eventChannel.subscribeAlways(BotInvitedJoinGroupRequestEvent.class, BotEventHandler.INSTANCE::botInvitedJoinGroupRequestEventHandler);
 
         // 群事件
         eventChannel.subscribeAlways(MemberJoinEvent.class, GroupEventHandler.INSTANCE::onMemberJoin);

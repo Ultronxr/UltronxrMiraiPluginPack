@@ -1,6 +1,7 @@
 package cn.ultronxr.umpp.eventHandler;
 
 import lombok.extern.slf4j.Slf4j;
+import net.mamoe.mirai.event.events.BotInvitedJoinGroupRequestEvent;
 import net.mamoe.mirai.event.events.BotOfflineEvent;
 import net.mamoe.mirai.event.events.BotReloginEvent;
 import net.mamoe.mirai.event.events.NewFriendRequestEvent;
@@ -59,6 +60,17 @@ public class BotEventHandler {
         }
         newFriendRequestEvent.reject(false);
         log.info("[system] qqrobot机器人好友添加请求处理结果：qq={} , 处理结果=reject", requestQQ);
+    }
+
+    /**
+     * BOT 被邀请加入群 事件处理器
+     * @param botInvitedJoinGroupRequestEvent 机器人被邀请加入群事件
+     */
+    public void botInvitedJoinGroupRequestEventHandler(BotInvitedJoinGroupRequestEvent botInvitedJoinGroupRequestEvent) {
+        long invitorQQ = botInvitedJoinGroupRequestEvent.getInvitorId();
+        long groupQQ = botInvitedJoinGroupRequestEvent.getGroupId();
+        botInvitedJoinGroupRequestEvent.accept();
+        log.info("[system] qqrobot机器人被邀请加入群聊事件：邀请人={}, 入群={} , 处理结果=accept", invitorQQ, groupQQ);
     }
 
 }
